@@ -1,5 +1,5 @@
 import { RouteView } from '@/components/layouts'
-import Home from '../views/Home.vue'
+import Home from '../views/daily/Home.vue'
 
 export const constantRouterMap = [
   {
