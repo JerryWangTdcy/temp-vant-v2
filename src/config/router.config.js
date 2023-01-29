@@ -1,10 +1,19 @@
+import { RouteView } from '@/components/layouts'
 import Home from '../views/Home.vue'
 
 export const constantRouterMap = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: RouteView,
+    redirect: '/home',
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: Home
+      }
+    ]
   },
   {
     path: '/about',
