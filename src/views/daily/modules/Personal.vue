@@ -38,7 +38,7 @@
       </template>
     </van-pull-refresh>
     <div class="btn-wrap">
-      <van-button type="info" icon="plus" block>新建日报</van-button>
+      <van-button type="info" icon="plus" block @click="addReport">新建日报</van-button>
     </div>
     <van-popup v-model="show" round position="bottom" :style="{ height: '35%' }">
       <van-datetime-picker
@@ -128,6 +128,12 @@ export default {
       // 设置时间选中值对应的索引
       this.$refs.picker.getPicker().setIndexes(this.indexes)
       this.show = false
+    },
+    // 新建日报
+    addReport() {
+      this.$router.push({
+        path: '/addReport'
+      })
     }
   },
 }

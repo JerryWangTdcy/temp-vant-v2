@@ -11,7 +11,26 @@ export const constantRouterMap = [
       {
         path: 'home',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: {
+          title: '工作汇报'
+        }
+      },
+      {
+        path: 'addReport',
+        name: 'addReport',
+        meta: {
+          title: '工作汇报'
+        },
+        component: () => import(/* webpackChunkName: "about" */ '@views/daily/modules/AddReport.vue')
+      },
+      {
+        path: 'addWorkItem',
+        name: 'addWorkItem',
+        meta: {
+          title: '新增工作项'
+        },
+        component: () => import(/* webpackChunkName: "about" */ '@views/daily/modules/AddWorkItem.vue')
       }
     ]
   },
