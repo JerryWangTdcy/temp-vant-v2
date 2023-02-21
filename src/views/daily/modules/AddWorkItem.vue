@@ -8,7 +8,7 @@
           <span class="require">*</span>
         </template>
       </van-cell>
-      <van-cell is-link value="【XM00001】吉大一入院项目">
+      <van-cell is-link value="【XM00001】吉大一入院项目" @click="showPro = true">
         <template #title>
           <span class="custom-title">选择项目 </span>
           <span class="require">*</span>
@@ -54,7 +54,7 @@
         <div class="input-number">
           <van-field v-model="value" type="number" placeholder="请输入" />
         </div>
-        <div class="input-select">
+        <div class="input-select" @click="showDateModal = true">
           小时
           <van-icon name="arrow-down" style="margin-left: 12px" />
         </div>
@@ -83,7 +83,7 @@
         <div class="input-number">
           <van-field v-model="value" type="number" placeholder="请输入" />
         </div>
-        <div class="input-select">
+        <div class="input-select" @click="showDateModal = true">
           小时
           <van-icon name="arrow-down" style="margin-left: 12px" />
         </div>
@@ -92,6 +92,114 @@
     <div class="submit">
       <van-button type="info" block>确定</van-button>
     </div>
+    <!-- 选择项目 -->
+    <van-popup v-model="showPro" round position="bottom" :style="{ maxHeight: '65%' }">
+      <div class="pop-main">
+        <div class="pop-title">
+          <van-icon name="cross" color="#fff" :size="20" />
+          <div class="title">请选择具体项目</div>
+          <van-icon name="cross" @click="showPro = false" :size="20" />
+        </div>
+        <div class="plan-list">
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+          <div class="item">
+            <van-checkbox v-model="checked" icon-size="16px"></van-checkbox>
+            <div class="plan-content">
+              <div class="plan-title">【XM00001】吉大一入院项目</div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <div>
+            <van-button type="info" plain block>全选</van-button>
+          </div>
+          <div>
+            <van-button type="info" block>确定</van-button>
+          </div>
+        </div>
+      </div>
+    </van-popup>
+    <!-- 事项类型 -->
+    <van-popup v-model="showProType" round position="bottom" :style="{ maxHeight: '50%' }">
+      <van-picker
+        title="事项类型"
+        show-toolbar
+        :columns="columns"
+        @confirm="onConfirm"
+        @cancel="onCancel"
+        @change="onChange"
+      />
+    </van-popup>
+    <!-- 时间点 -->
+    <van-popup v-model="showDateModal" round position="bottom" :style="{ maxHeight: '50%' }">
+      <van-picker
+        title="请选择"
+        show-toolbar
+        :columns="columnsDate"
+        @confirm="onConfirm"
+        @cancel="onCancel"
+        @change="onChange"
+      />
+    </van-popup>
   </div>
 </template>
 <script>
@@ -100,8 +208,24 @@ export default {
     return {
       message: '',
       value: '',
-      checked: false
+      showPro: false,
+      checked: false,
+      showProType: false,
+      showDateModal: false,
+      columns: ['日报', '项目'],
+      columnsDate: ['小时', '分']
     }
+  },
+  methods: {
+    onConfirm(value, index) {
+      this.$toast(`当前值：${value}, 当前索引：${index}`);
+    },
+    onChange(picker, value, index) {
+      this.$toast(`当前值：${value}, 当前索引：${index}`);
+    },
+    onCancel() {
+      this.$toast('取消');
+    },
   }
 }
 </script>
@@ -162,4 +286,55 @@ export default {
   box-sizing border-box
   .van-button
     border-radius: 12px
+.pop-main
+  padding 42px 30px
+  background: #fff
+  position relative
+  .pop-title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    font-size 28px
+    color #666666
+    line-height: 40px
+    margin-bottom: 30px
+    .title
+      font-size 32px
+      color #333
+      flex 1
+      font-weight bold
+      text-align center
+  .plan-list
+    max-height: 800px
+    padding-bottom: 100px
+    overflow-y scroll
+    .item
+      background: #fff
+      display: flex
+      align-items: center
+      padding 30px
+      height: 40px
+      border-radius 12px
+      margin-bottom 16px
+      border-bottom 1PX solid #e5e5e5
+      .plan-content
+        color #333333
+        font-size 28px
+        line-height 40px
+        margin-left 20px
+        flex 1
+  .btn-group
+    position absolute
+    width 100%
+    bottom 0
+    left 0
+    display: flex
+    padding 20px 30px
+    background: #fff
+    gap 20px
+    box-sizing: border-box
+    div
+      flex 1
+      .van-button
+        border-radius: 12px
 </style>
